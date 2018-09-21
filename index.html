@@ -1,14 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hackathon G189</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Latest compiled and minified CSS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"/> 
+<script>
+  function getSong(event) {
+    event.preventDefault()
+  const value = document.getElementById('track-title').value;
+  axios.get(`https://api.spotify.com/v1/search?query=${value}&type=track&market=US&offset=0&limit=10`, {
+    headers: {
+      "Authorization": "Bearer BQBK8y6NLB-FnWRW7RnTOTcoAKt-6Xd0ctlXGLEYhuL-X62HoF6dZr2WfVq6HZIsT4e934LDPs1xFdYt1uYAritUu86uwf_9voOx_kmF3edrcgb8KdmogrNdIrSma1a_taTVaCXijR93y5S3p3iqtmpSFoTo5A"
+    }
+  })
+  .then((data) => {
+    const list = document.getElementByI('trackList'); 
+    list.innerHTML ='';
+    data.data.tracks.items.map(track => {
+      let item = document.createElement('li')
+      let anchor = document.createElement('a')
+      item.classList.add('list-group-item')
+      anchor.href = track.url;
+      anchor.innerHTML = track.name;
+      item.appendChild(anchor)
+      list.appendChild(item)
+   })
+  })
+}
+</script>
+<title>Spotify API</title>
 </head>
+
 <body>
-    <h1>
-        Test 
-    </h1>
+  
+  <div class="well well-Lg">
+    <h1>Welcome<h1>
+      <form class="form" onsubmit="getSong()">
+        <div class="form-group">
+          <label for="track-title">Enter Track Title</label>
+          <input type="text" id="track-title" class="form-control">
+        </div>
+      </form>
+  </div>
+
+  <h1>
+    Tracks
+  </h1>
+
+  <ul id="trackList">
+
+  </ul>
+  
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"/>
+<script>
+  function getSong(event) {
+    console.log('HIIIIIIIII')
+    event.preventDefault()
+  const value = document.getElementById('track-title').value;
+  axios.get(`https://api.spotify.com/v1/search?query=${value}&type=track&market=US&offset=0&limit=10`, {
+    headers: {
+      "Authorization": "Bearer BQBK8y6NLB-FnWRW7RnTOTcoAKt-6Xd0ctlXGLEYhuL-X62HoF6dZr2WfVq6HZIsT4e934LDPs1xFdYt1uYAritUu86uwf_9voOx_kmF3edrcgb8KdmogrNdIrSma1a_taTVaCXijR93y5S3p3iqtmpSFoTo5A"
+    }
+  })
+  .then((data) => {
+    const list = document.getElementByI('trackList'); 
+    list.innerHTML ='';
+    data.data.tracks.items.map(track => {
+      let item = document.createElement('li')
+      let anchor = document.createElement('a')
+      item.classList.add('list-group-item')
+      anchor.href = track.url;
+      anchor.innerHTML = track.name;
+      item.appendChild(anchor)
+      list.appendChild(item)
+   })
+  })
+}
+</script> -->
 </body>
 </html>

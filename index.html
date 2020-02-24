@@ -28,7 +28,7 @@
       let item = document.createElement('li')
       let anchor = document.createElement('a')
       item.classList.add('list-group-item')
-      anchor.href = track.url;
+      anchor.href = track.uri;
       anchor.innerHTML = track.name;
       item.appendChild(anchor)
       list.appendChild(item)
@@ -59,31 +59,5 @@
 
   </ul>
   
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"/>
-<script>
-  function getSong(event) {
-    console.log('HIIIIIIIII')
-    event.preventDefault()
-  const value = document.getElementById('track-title').value;
-  axios.get(`https://api.spotify.com/v1/search?query=${value}&type=track&market=US&offset=0&limit=10`, {
-    headers: {
-      "Authorization": "Bearer BQBK8y6NLB-FnWRW7RnTOTcoAKt-6Xd0ctlXGLEYhuL-X62HoF6dZr2WfVq6HZIsT4e934LDPs1xFdYt1uYAritUu86uwf_9voOx_kmF3edrcgb8KdmogrNdIrSma1a_taTVaCXijR93y5S3p3iqtmpSFoTo5A"
-    }
-  })
-  .then((data) => {
-    const list = document.getElementByI('trackList'); 
-    list.innerHTML ='';
-    data.data.tracks.items.map(track => {
-      let item = document.createElement('li')
-      let anchor = document.createElement('a')
-      item.classList.add('list-group-item')
-      anchor.href = track.url;
-      anchor.innerHTML = track.name;
-      item.appendChild(anchor)
-      list.appendChild(item)
-   })
-  })
-}
-</script> -->
 </body>
 </html>
